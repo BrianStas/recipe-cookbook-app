@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <form>
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-success">Save</button>
@@ -14,9 +14,9 @@
                         <input 
                         type="text" 
                         class="form-control" 
-                        id="name" 
-                        name="name" 
-                        ngModel>
+                        id="name"
+                        formControlName="name"
+                        >
                     </div>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                         type="text" 
                         class="form-control" 
                         id="imagePath" 
-                        name="imagePath" 
-                        ngModel>
+                        formControlName="imagePath"
+                        >
                     </div>
                 </div>
             </div>
@@ -47,23 +47,28 @@
                         class="form-control" 
                         id="description"
                         rows="6" 
-                        name="name" 
-                        ngModel>
+                        formControlName="description"
+                        >
                     </textarea>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="row">
+                <div class="col-xs-12" formArrayName="ingredients">
+                    <div 
+                    class="row"
+                    *ngFor="let ingredientCtrl of controls; let i = index" 
+                    [formGroupName]="i">
                         <div class="col-xs-8">
                             <input 
                             type="text"
-                            class="form-control">
+                            class="form-control"
+                            formControlName="name">
                         </div>
                         <div class="col-xs-2">
                             <input type="number"
-                            class="form-control">
+                            class="form-control"
+                            formControlName="amount">
                         </div>
                         <div class="col-xs-2">
                             <button class="btn btn-danger"> X </button>
@@ -74,7 +79,7 @@
                         class="form-control" 
                         id="name" 
                         name="name" 
-                        ngModel>
+                        >
                     
                 </div>
             </div>
